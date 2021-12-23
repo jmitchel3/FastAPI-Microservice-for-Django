@@ -1,0 +1,28 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+name: fastapi-microservice-for-django
+region: nyc
+services:
+- dockerfile_path: Dockerfile
+  envs:
+  - key: DEBUG
+    scope: RUN_AND_BUILD_TIME
+    value: "0"
+  - key: ECHO_ACTIVE
+    scope: RUN_AND_BUILD_TIME
+    value: "0"
+  - key: APP_AUTH_TOKEN
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:IIVO1C59ARmOxn89G6w3nnEJ61PPHbeU:n1vALAgpxVQiLr0iMlQgX9y73rzm3Rw5zGkfh4m7GMr0qdEpkLXm+iXDxSvmVKqcSryjdaEXMT4L2qw=]
+  git:
+    branch: main
+    repo_clone_url: https://github.com/codingforentrepreneurs/FastAPI-Microservice-for-Django.git
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: web
+  routes:
+  - path: /
+  source_dir: /
